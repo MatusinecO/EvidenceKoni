@@ -11,6 +11,7 @@ namespace EvidenceKoni.Models
         public int Id { get; set; }
         [Display(Name ="Typ zákroku")]
         public Profession Profession { get; set; }
+        [Display(Name = "Popis zákroku")]
         public string Operation { get; set; } = "";
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",

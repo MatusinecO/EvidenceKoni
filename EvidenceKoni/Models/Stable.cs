@@ -6,7 +6,14 @@ namespace EvidenceKoni.Models
 {
     public enum Paid
     {
-        Monthly, Weekly, Daily, Other
+        [Display(Name = "Mesíčně")]
+        Monthly,
+        [Display(Name = "Týdně")]
+        Weekly,
+        [Display(Name = "Denně")]
+        Daily,
+        [Display(Name = "jinak")]
+        Other
     }
     public class Stable
     {

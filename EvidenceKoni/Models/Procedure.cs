@@ -4,7 +4,7 @@ namespace EvidenceKoni.Models
 {
     public enum Profession
     {
-        Veterinarian,Farrier,Trainer,Other
+        Veterinář,Podkovář,Trenér,Jiné
     }
     public class Procedure
     {

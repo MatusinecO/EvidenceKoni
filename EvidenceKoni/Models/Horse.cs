@@ -6,7 +6,13 @@ namespace EvidenceKoni.Models
 {
     public enum Sex
     {
-        Mare,Gelding,Stallion,Foal
+        [Display(Name = "Valach")]
+        Gelding,
+        [Display(Name = "Kobyla")]
+        Mare,
+        [Display(Name = "Hřebec")]
+        Stalion,
+        
     }
     public class Horse
     {

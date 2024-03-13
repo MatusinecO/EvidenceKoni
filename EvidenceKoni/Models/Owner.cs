@@ -17,6 +17,14 @@ namespace EvidenceKoni.Models
         public string Adress { get; set; } = "";
         [Display(Name = "Město")]
         public string City { get; set; } = "";
+        [Display(Name = "Celé jméno")]
+        public string FullName
+        {
+            get
+            {
+                return Name + " " + Surname;
+            }
+        }
         public ICollection<Stable>? Stables { get; set; }
         public ICollection<Horse>? Horses { get; set; }
 

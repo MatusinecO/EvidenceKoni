@@ -48,7 +48,7 @@ namespace EvidenceKoni.Controllers
         // GET: Horses/Create
         public IActionResult Create()
         {
-            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "Id");
+            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace EvidenceKoni.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "Id", horse.OwnerId);
+            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName", horse.OwnerId);
             return View(horse);
         }
 

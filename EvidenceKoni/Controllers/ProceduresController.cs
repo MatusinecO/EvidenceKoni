@@ -48,7 +48,7 @@ namespace EvidenceKoni.Controllers
         // GET: Procedures/Create
         public IActionResult Create()
         {
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id");
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name");
             return View();
         }
 

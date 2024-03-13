@@ -45,10 +45,10 @@ namespace EvidenceKoni.Controllers
             return View(stable);
         }
 
-        // GET: Stables/Create
+        // GET: Stables/Create/Změna na FullName(vytvořeno v Models=>Owner)
         public IActionResult Create()
         {
-            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "Id");
+            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName");
             return View();
         }
 

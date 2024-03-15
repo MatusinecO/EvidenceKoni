@@ -48,6 +48,48 @@
         </dd>
     </dl>
 </div>
+<table>
+    <thead>
+        <tr>
+            <th>Jméno</th>
+            <th>Datum narození</th>
+            <th>Barva</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var horse in Model.Horses)
+        {
+            <tr>
+                <td>@horse.Name</td>
+                <td>@horse.BirthDate.ToShortDateString()</td>
+                <td>@horse.Color</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th>Ustájený od</th>
+            <th>Ustájený do</th>
+            <th>Cena</th>
+            <th>Platba</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stable in Model.Stables)
+        {
+            <tr>
+                <td>@stable.StabledFrom.ToShortDateString()</td>
+                <td>@stable.StabledTo.ToShortDateString()</td>
+                <td>@stable.Price</td>
+                <td>@stable.Paid</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

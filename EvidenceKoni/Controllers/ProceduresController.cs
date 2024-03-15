@@ -82,7 +82,7 @@ namespace EvidenceKoni.Controllers
             {
                 return NotFound();
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
             return View(procedure);
         }
 
@@ -118,7 +118,7 @@ namespace EvidenceKoni.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "FullName", procedure.HorseId);
             return View(procedure);
         }
 

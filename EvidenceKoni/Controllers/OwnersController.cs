@@ -30,12 +30,14 @@ namespace EvidenceKoni.Controllers
         // GET: Owners/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Owner == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var owner = await _context.Owner
+                .Include(c=>c.Stables)
+                .Include(c=>c.Horses)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {

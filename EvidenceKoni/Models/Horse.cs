@@ -17,6 +17,7 @@ namespace EvidenceKoni.Models
     public class Horse
     {
         public int Id { get; set; }
+        [Display(Name ="Jméno")]
         public string Name { get; set; } = "";
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",

@@ -25,7 +25,7 @@ namespace EvidenceKoni.Controllers
             var applicationDbContext = _context.Horse.Include(h => h.Owners);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        
         // GET: Horses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,6 +44,28 @@ namespace EvidenceKoni.Controllers
 
             return View(horse);
         }
+        
+        /*
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var horse = await _context.Horse
+                .Include(s => s.Owners)
+                .ThenInclude(e => e.Stables)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (horse == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        */
 
         // GET: Horses/Create
         public IActionResult Create()
@@ -82,7 +104,7 @@ namespace EvidenceKoni.Controllers
             {
                 return NotFound();
             }
-            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "Id", horse.OwnerId);
+            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName", horse.OwnerId);
             return View(horse);
         }
 

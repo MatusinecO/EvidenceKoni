@@ -1,11 +1,55 @@
 ﻿@model IEnumerable<EvidenceKoni.Models.Owner>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Majtelé";
 }
 
-<h1>Index</h1>
 
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nový majitel</a>
+</p>
+
+<div class="row g-1 w-100 m-auto">
+    @foreach(var item in Model)
+    {
+        <div class="col bg-dark bg-opacity-25 border border-primary">
+            <div class="card-header">
+                <h2 class="text-center">@item.FullName</h2>
+            </div>
+            <div calss="card-body ">
+                <p class="text-center">@item.Phone</p>
+                <p class="text-center">@item.Email</p>
+                <p class="text-center">@item.City<span>, @item.Adress</span></p>
+
+            </div>
+            <div class="card-footer ">
+
+                <p class="text-center">
+                    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-dark" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </p>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <h1>Index</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -62,4 +106,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@

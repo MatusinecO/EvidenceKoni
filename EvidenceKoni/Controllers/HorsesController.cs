@@ -36,6 +36,7 @@ namespace EvidenceKoni.Controllers
 
             var horse = await _context.Horse
                 .Include(h => h.Owners)
+                .Include(p=>p.Procedures)               // --> přidal sem procedury
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (horse == null)
             {

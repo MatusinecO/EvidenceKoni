@@ -22,8 +22,8 @@ namespace EvidenceKoni.Controllers
         // GET: Owners
         public async Task<IActionResult> Index()
         {
-              return _context.Owner != null ? 
-                          View(await _context.Owner.ToListAsync()) :
+            return _context.Owner != null ?
+                        View(await _context.Owner.ToListAsync()):
                           Problem("Entity set 'ApplicationDbContext.Owner'  is null.");
         }
 
@@ -38,7 +38,7 @@ namespace EvidenceKoni.Controllers
             var owner = await _context.Owner
                 .Include(c=>c.Stables)
                 .Include(c=>c.Horses)
-                .FirstOrDefaultAsync(m => m.Id == id);
+				.FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();

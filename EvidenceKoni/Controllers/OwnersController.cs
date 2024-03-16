@@ -161,5 +161,7 @@ namespace EvidenceKoni.Controllers
         {
           return (_context.Owner?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+       
     }
 }

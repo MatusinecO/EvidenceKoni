@@ -66,8 +66,6 @@
             </tbody>
         </table>
     </div>
-
-
     <div class="col">
         <h3>Ustájení</h3>
         <table>
@@ -83,11 +81,10 @@
                 @foreach(var stable in Model.Stables)
                 {
                     <tr>
+                        <td><a class="text-decoration-none text-success" asp-controller="Stables" asp-action="Details" asp-route-id="@stable.Id"><strong>@stable.Paid</strong></a></td>
                         <td>@stable.StabledFrom.ToShortDateString()</td>
                         <td>@stable.StabledTo.ToShortDateString()</td>
                         <td>@stable.Price</td>
-                        <td>@stable.Paid</td>
-
                     </tr>
                 }
             </tbody>

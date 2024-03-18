@@ -6,9 +6,9 @@ namespace EvidenceKoni.Models
     {
         public int Id { get; set; }
         [Display(Name="Jméno")]
-        public string Name { get; set; } = "";
+        public string FirstName { get; set; } = "";
         [Display(Name = "Příjmení")]
-        public string Surname { get; set; } = "";
+        public string LastName { get; set; } = "";
         [Display(Name = "Telefonní číslo")]
         public string Phone { get; set; } = "";
         [Display(Name = "Email")]
@@ -17,12 +17,12 @@ namespace EvidenceKoni.Models
         public string Adress { get; set; } = "";
         [Display(Name = "Město")]
         public string City { get; set; } = "";
-        [Display(Name = "Celé jméno")]
+        [Display(Name = "Jméno")]
         public string FullName
         {
             get
             {
-                return Name + " " + Surname;
+                return FirstName + " " + LastName;
             }
         }
         public ICollection<Stable>? Stables { get; set; }

@@ -22,7 +22,7 @@ namespace EvidenceKoni.Controllers
         // GET: Procedures
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Procedure.Include(p => p.Horse);
+            var applicationDbContext = _context.Procedure.Include(p => p.Horse).Include(p => p.Worker);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace EvidenceKoni.Controllers
 
             var procedure = await _context.Procedure
                 .Include(p => p.Horse)
-                .Include(d=>d.Worker) //přidáno
+                .Include(p => p.Worker)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (procedure == null)
             {
@@ -49,7 +49,8 @@ namespace EvidenceKoni.Controllers
         // GET: Procedures/Create
         public IActionResult Create()
         {
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name");
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id");
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id");
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace EvidenceKoni.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Profession,Operation,DateOfProcedure,Price,Note,HorseId")] Procedure procedure)
+        public async Task<IActionResult> Create([Bind("Id,Operation,DateOfProcedure,Price,Note,HorseId,WorkerId")] Procedure procedure)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +68,7 @@ namespace EvidenceKoni.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
             return View(procedure);
         }
 
@@ -83,7 +85,8 @@ namespace EvidenceKoni.Controllers
             {
                 return NotFound();
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
             return View(procedure);
         }
 
@@ -92,7 +95,7 @@ namespace EvidenceKoni.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Profession,Operation,DateOfProcedure,Price,Note,HorseId")] Procedure procedure)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Operation,DateOfProcedure,Price,Note,HorseId,WorkerId")] Procedure procedure)
         {
             if (id != procedure.Id)
             {
@@ -119,7 +122,8 @@ namespace EvidenceKoni.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "FullName", procedure.HorseId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
             return View(procedure);
         }
 
@@ -133,6 +137,7 @@ namespace EvidenceKoni.Controllers
 
             var procedure = await _context.Procedure
                 .Include(p => p.Horse)
+                .Include(p => p.Worker)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (procedure == null)
             {

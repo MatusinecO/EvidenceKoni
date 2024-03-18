@@ -10,91 +10,89 @@ using EvidenceKoni.Models;
 
 namespace EvidenceKoni.Controllers
 {
-    public class ProceduresController : Controller
+    public class WorkersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProceduresController(ApplicationDbContext context)
+        public WorkersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Procedures
+        // GET: Workers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Procedure.Include(p => p.Horse);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.Worker != null ? 
+                          View(await _context.Worker.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Worker'  is null.");
         }
 
-        // GET: Procedures/Details/5
+        // GET: Workers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Procedure == null)
+            if (id == null || _context.Worker == null)
             {
                 return NotFound();
             }
 
-            var procedure = await _context.Procedure
-                .Include(p => p.Horse)
-                .Include(d=>d.Worker) //přidáno
+            var worker = await _context.Worker
+                .Include(s=>s.Procedures) //Přidáno
+                .ThenInclude(h=>h.Horse) // Přidáno
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (procedure == null)
+            if (worker == null)
             {
                 return NotFound();
             }
 
-            return View(procedure);
+            return View(worker);
         }
 
-        // GET: Procedures/Create
+        // GET: Workers/Create
         public IActionResult Create()
         {
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name");
             return View();
         }
 
-        // POST: Procedures/Create
+        // POST: Workers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Profession,Operation,DateOfProcedure,Price,Note,HorseId")] Procedure procedure)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Profession,Adress,Phone,Email,Note")] Worker worker)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(procedure);
+                _context.Add(worker);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
-            return View(procedure);
+            return View(worker);
         }
 
-        // GET: Procedures/Edit/5
+        // GET: Workers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Procedure == null)
+            if (id == null || _context.Worker == null)
             {
                 return NotFound();
             }
 
-            var procedure = await _context.Procedure.FindAsync(id);
-            if (procedure == null)
+            var worker = await _context.Worker.FindAsync(id);
+            if (worker == null)
             {
                 return NotFound();
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
-            return View(procedure);
+            return View(worker);
         }
 
-        // POST: Procedures/Edit/5
+        // POST: Workers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Profession,Operation,DateOfProcedure,Price,Note,HorseId")] Procedure procedure)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Profession,Adress,Phone,Email,Note")] Worker worker)
         {
-            if (id != procedure.Id)
+            if (id != worker.Id)
             {
                 return NotFound();
             }
@@ -103,12 +101,12 @@ namespace EvidenceKoni.Controllers
             {
                 try
                 {
-                    _context.Update(procedure);
+                    _context.Update(worker);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProcedureExists(procedure.Id))
+                    if (!WorkerExists(worker.Id))
                     {
                         return NotFound();
                     }
@@ -119,51 +117,49 @@ namespace EvidenceKoni.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "FullName", procedure.HorseId);
-            return View(procedure);
+            return View(worker);
         }
 
-        // GET: Procedures/Delete/5
+        // GET: Workers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Procedure == null)
+            if (id == null || _context.Worker == null)
             {
                 return NotFound();
             }
 
-            var procedure = await _context.Procedure
-                .Include(p => p.Horse)
+            var worker = await _context.Worker
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (procedure == null)
+            if (worker == null)
             {
                 return NotFound();
             }
 
-            return View(procedure);
+            return View(worker);
         }
 
-        // POST: Procedures/Delete/5
+        // POST: Workers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Procedure == null)
+            if (_context.Worker == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Procedure'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Worker'  is null.");
             }
-            var procedure = await _context.Procedure.FindAsync(id);
-            if (procedure != null)
+            var worker = await _context.Worker.FindAsync(id);
+            if (worker != null)
             {
-                _context.Procedure.Remove(procedure);
+                _context.Worker.Remove(worker);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProcedureExists(int id)
+        private bool WorkerExists(int id)
         {
-          return (_context.Procedure?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Worker?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

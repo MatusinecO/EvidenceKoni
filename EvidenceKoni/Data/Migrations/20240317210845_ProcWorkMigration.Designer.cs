@@ -4,6 +4,7 @@ using EvidenceKoni.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvidenceKoni.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317210845_ProcWorkMigration")]
+    partial class ProcWorkMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +82,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Horse", (string)null);
+                    b.ToTable("Horse");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Owner", b =>
@@ -116,7 +119,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owner", (string)null);
+                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Procedure", b =>
@@ -148,7 +151,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("HorseId");
 
-                    b.ToTable("Procedure", (string)null);
+                    b.ToTable("Procedure");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.ProcedureWorker", b =>
@@ -171,7 +174,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("ProcedureWorker", (string)null);
+                    b.ToTable("ProcedureWorker");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Stable", b =>
@@ -205,7 +208,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Stable", (string)null);
+                    b.ToTable("Stable");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Worker", b =>
@@ -245,7 +248,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Worker", (string)null);
+                    b.ToTable("Worker");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

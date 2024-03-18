@@ -4,6 +4,7 @@ using EvidenceKoni.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvidenceKoni.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317203625_ProcedureWorkerMigration")]
+    partial class ProcedureWorkerMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +82,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Horse", (string)null);
+                    b.ToTable("Horse");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Owner", b =>
@@ -116,7 +119,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owner", (string)null);
+                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Procedure", b =>
@@ -148,7 +151,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("HorseId");
 
-                    b.ToTable("Procedure", (string)null);
+                    b.ToTable("Procedure");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.ProcedureWorker", b =>
@@ -159,19 +162,19 @@ namespace EvidenceKoni.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProcedureId")
+                    b.Property<int>("HorseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkerId")
+                    b.Property<int>("ProcedureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HorseId");
+
                     b.HasIndex("ProcedureId");
 
-                    b.HasIndex("WorkerId");
-
-                    b.ToTable("ProcedureWorker", (string)null);
+                    b.ToTable("ProcedureWorker");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Stable", b =>
@@ -205,47 +208,7 @@ namespace EvidenceKoni.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Stable", (string)null);
-                });
-
-            modelBuilder.Entity("EvidenceKoni.Models.Worker", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Profession")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Worker", (string)null);
+                    b.ToTable("Stable");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -474,21 +437,21 @@ namespace EvidenceKoni.Data.Migrations
 
             modelBuilder.Entity("EvidenceKoni.Models.ProcedureWorker", b =>
                 {
+                    b.HasOne("EvidenceKoni.Models.Horse", "Horse")
+                        .WithMany()
+                        .HasForeignKey("HorseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EvidenceKoni.Models.Procedure", "Procedure")
                         .WithMany("ProcedureWorkers")
                         .HasForeignKey("ProcedureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EvidenceKoni.Models.Worker", "Worker")
-                        .WithMany("ProcedureWorkers")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Horse");
 
                     b.Navigation("Procedure");
-
-                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Stable", b =>
@@ -566,11 +529,6 @@ namespace EvidenceKoni.Data.Migrations
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Procedure", b =>
-                {
-                    b.Navigation("ProcedureWorkers");
-                });
-
-            modelBuilder.Entity("EvidenceKoni.Models.Worker", b =>
                 {
                     b.Navigation("ProcedureWorkers");
                 });

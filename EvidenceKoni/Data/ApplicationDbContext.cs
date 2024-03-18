@@ -14,5 +14,6 @@ namespace EvidenceKoni.Data
         public DbSet<EvidenceKoni.Models.Owner> Owner { get; set; } = default!;
         public DbSet<EvidenceKoni.Models.Procedure> Procedure { get; set; } = default!;
         public DbSet<EvidenceKoni.Models.Stable> Stable { get; set; } = default!;
+        public DbSet<EvidenceKoni.Models.Worker> Worker { get; set; } = default!;
     }
 }

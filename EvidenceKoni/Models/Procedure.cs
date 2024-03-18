@@ -2,15 +2,9 @@
 
 namespace EvidenceKoni.Models
 {
-    public enum Profession
-    {
-        Veterinář,Podkovář,Trenér,Jiné
-    }
     public class Procedure
     {
         public int Id { get; set; }
-        [Display(Name ="Typ zákroku")]
-        public Profession Profession { get; set; }
         [Display(Name = "Popis zákroku")]
         public string Operation { get; set; } = "";
         [DataType(DataType.Date)]
@@ -23,7 +17,10 @@ namespace EvidenceKoni.Models
         public decimal Price { get; set; }
         [Display(Name ="Poznámka")]
         public string Note { get; set; } = "";
-        public int HorseId { get; set; }
+        public int? HorseId { get; set; }
         public Horse? Horse { get; set; }
+        public int? WorkerId { get; set; }
+        public Worker? Worker { get; set; }
+
     }
 }

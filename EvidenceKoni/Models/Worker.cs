@@ -27,7 +27,7 @@ namespace EvidenceKoni.Models
         public string Adress { get; set; } = "";
         [Display(Name = "Město")]
         public string City { get; set; } = "";
-        [Phone(ErrorMessage ="Neplatné telefonní číslo")]
+        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Telefon")]
         public string Phone { get; set; } = "";
 

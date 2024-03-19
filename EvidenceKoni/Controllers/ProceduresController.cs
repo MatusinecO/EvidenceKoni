@@ -49,8 +49,8 @@ namespace EvidenceKoni.Controllers
         // GET: Procedures/Create
         public IActionResult Create()
         {
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id");
-            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id");
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name");
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "FullName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace EvidenceKoni.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
-            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "FullName", procedure.WorkerId);
             return View(procedure);
         }
 
@@ -85,8 +85,8 @@ namespace EvidenceKoni.Controllers
             {
                 return NotFound();
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
-            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "FullName", procedure.WorkerId);
             return View(procedure);
         }
 
@@ -122,8 +122,8 @@ namespace EvidenceKoni.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Id", procedure.HorseId);
-            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "Id", procedure.WorkerId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
+            ViewData["WorkerId"] = new SelectList(_context.Worker, "Id", "FullName", procedure.WorkerId);
             return View(procedure);
         }
 

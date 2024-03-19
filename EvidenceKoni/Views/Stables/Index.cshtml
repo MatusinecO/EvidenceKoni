@@ -4,12 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">Přehled ustájení</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="text-center">
+    <a class="btn btn-outline-success" asp-action="Create">Nové ustájení</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Paid)</th>
+            <th>@Html.DisplayNameFor(model => model.StabledFrom)</th>
+            <th>@Html.DisplayNameFor(model => model.StabledTo)</th>
+            <th>@Html.DisplayNameFor(model => model.Owners.FullName)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Paid)</td>
+                <td>@Html.DisplayFor(modelItem => item.StabledFrom)</td>
+                <td>@Html.DisplayFor(modelItem => item.StabledTo)</td>
+                <td>@item.Owners?.FullName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*
+    <table class="table">
     <thead>
         <tr>
             <th>
@@ -28,7 +60,7 @@
                 @Html.DisplayNameFor(model => model.Note)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Owners)
+                @Html.DisplayNameFor(model => model.Owners.FullName)
             </th>
             <th></th>
         </tr>
@@ -63,3 +95,5 @@
 }
     </tbody>
 </table>
+*@
+

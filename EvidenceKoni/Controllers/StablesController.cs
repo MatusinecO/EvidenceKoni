@@ -66,7 +66,7 @@ namespace EvidenceKoni.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName", stable.OwnerId);
+            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FirstName", stable.OwnerId);
             return View(stable);
         }
 
@@ -119,7 +119,7 @@ namespace EvidenceKoni.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "Id", stable.OwnerId);
+            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName", stable.OwnerId);
             return View(stable);
         }
 
@@ -138,7 +138,7 @@ namespace EvidenceKoni.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName", stable.OwnerId);
             return View(stable);
         }
 

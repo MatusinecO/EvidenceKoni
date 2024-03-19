@@ -4,7 +4,41 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Přehled</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Operation)</th>
+                <th>@Html.DisplayNameFor(model => model.DateOfProcedure)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Note)</th>
+                <th>@Html.DisplayNameFor(model => model.Horse.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Worker.FullName)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Operation)</td>
+                <td>@Html.DisplayFor(model => model.DateOfProcedure)</td>
+                <td>@Html.DisplayFor(model => model.Price)</td>
+                <td>@Html.DisplayFor(model => model.Note)</td>
+                <td>@Html.DisplayFor(model => model.Horse.Name)</td>
+                <td>@Html.DisplayFor(model => model.Worker.FullName)</td>
+            </tr>
+        </tbody>
+    </table>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="me-2">
+        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+
+@*
+    <h1>Details</h1>
 
 <div>
     <h4>Procedure</h4>
@@ -53,3 +87,6 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+*@
+

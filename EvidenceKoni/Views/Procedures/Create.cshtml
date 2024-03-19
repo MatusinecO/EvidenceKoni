@@ -4,7 +4,63 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Vytvořit</h1>
+
+<h4 class="text-center">Nový záznam o proceduře</h4>
+<hr />
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <style>
+            /* Fixed width for the form container */
+            .container > .row > .col-md-6 {
+                width: 500px; /* Adjust the width as needed */
+            }
+        </style>
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Operation" class="control-label">Název procedury:</label>
+                    <input asp-for="Operation" class="form-control" />
+                    <span asp-validation-for="Operation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfProcedure" class="control-label">Datum provedení:</label>
+                    <input asp-for="DateOfProcedure" class="form-control" />
+                    <span asp-validation-for="DateOfProcedure" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label">Cena:</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Note" class="control-label">Poznámka:</label>
+                    <input asp-for="Note" class="form-control" />
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HorseId" class="control-label">Kůň:</label>
+                    <select asp-for="HorseId" class="form-control" asp-items="ViewBag.HorseId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WorkerId" class="control-label">Pracovník:</label>
+                    <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Vytvořit" class="btn btn-outline-success mb-2 mt-2" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-outline-primary">Zpět na seznam</a>
+</div>
+
+@*
+    <h1>Create</h1>
 
 <h4>Procedure</h4>
 <hr />
@@ -50,4 +106,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+*@
+
 

@@ -8,8 +8,9 @@
 
 <h1 class="text-center">Přehled Pracovníků</h1>
 
-<div class="text-center">
-    <a class="btn btn-outline-success" asp-action="Create">Nový pracovník</a>
+<div class="btn btn-group">
+    <a class="btn btn-outline-dark" asp-action="Create">Nový pracovník</a>
+    <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
 <table class="table table-striped">
@@ -37,9 +38,12 @@
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                    <div class="btn btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                    </div>
+                    
                 </td>
             </tr>
         }

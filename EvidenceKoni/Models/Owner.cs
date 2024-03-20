@@ -17,7 +17,7 @@ namespace EvidenceKoni.Models
         public string Adress { get; set; } = "";
         [Display(Name = "Město")]
         public string City { get; set; } = "";
-        [Display(Name = "Jméno")]
+        [Display(Name = "Jméno majitele")]
         public string FullName
         {
             get

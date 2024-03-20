@@ -35,8 +35,9 @@ namespace EvidenceKoni.Models
         [Display(Name = "Email")]
         public string Email { get; set; } = "";
         [Display(Name = "Poznámka")]
+        [Required(AllowEmptyStrings =true)]
         public string Note { get; set; } = "";
-        [Display(Name = "Jméno")]
+        [Display(Name = "Jméno pracovníka")]
         public string FullName
         {
             get

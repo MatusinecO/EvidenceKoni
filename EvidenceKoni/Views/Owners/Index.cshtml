@@ -1,42 +1,42 @@
 ﻿@model IEnumerable<EvidenceKoni.Models.Owner>
 
 @{
-    ViewData["Title"] = "Majtelé";
+    ViewData["Title"] = "Majitelé";
 }
 
 
-
-<p>
-    <a class="btn btn-primary" asp-action="Create">Nový majitel</a>
-</p>
-
-<div class="row g-1 w-100 m-auto">
-    @foreach(var item in Model)
-    {
-        <div class="col bg-dark bg-opacity-25 border border-primary">
-            <div class="card-header">
-                <h2 class="text-center">@item.FullName</h2>
-            </div>
-            <div calss="card-body ">
-                <p class="text-center">@item.Phone</p>
-                <p class="text-center">@item.Email</p>
-                <p class="text-center">@item.City<span>, @item.Adress</span></p>
-
-            </div>
-            <div class="card-footer ">
-
-                <p class="text-center">
-                    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a class="btn btn-dark" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </p>
-            </div>
-        </div>
-
-    }
+<div class="btn btn-group">
+    <a class="btn btn-outline-dark" asp-action="Create">Nový majitel</a>
+    <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
-
+<div class="container">
+    <h1 class="text-center">Seznam majitelů</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">@item.FullName</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center">@item.Phone</p>
+                        <p class="text-center">@item.Email</p>
+                        <p class="text-center">@item.City<span>, @item.Adress</span></p>
+                    </div>
+                    <div class="card-footer" align="center">
+                        <div class="btn btn-group justify-content-center">
+                            <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Detaily</a>
+                            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.Id">Upravit</a>
+                            <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 
 

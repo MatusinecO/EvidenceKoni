@@ -5,7 +5,97 @@
 }
 
 
-<h1>Create</h1>
+
+
+<h1 class="text-center">Vytvořit</h1>
+
+<h4 class="text-center">Nový kůň</h4>
+<hr />
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <style>
+            /* Fixed width for the form container */
+            .container > .row > .col-md-6 {
+                width: 500px; /* Adjust the width as needed */
+            }
+        </style>
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Jméno:</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label">Datum narození:</label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Burn" class="control-label">Výžeh:</label>
+                    <input asp-for="Burn" class="form-control" />
+                    <span asp-validation-for="Burn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Chip" class="control-label">Čip:</label>
+                    <input asp-for="Chip" class="form-control" />
+                    <span asp-validation-for="Chip" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LifeNumber" class="control-label">Životní číslo</label>
+                    <input asp-for="LifeNumber" class="form-control" />
+                    <span asp-validation-for="LifeNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CardNumber" class="control-label">Číslo průkazu:</label>
+                    <input asp-for="CardNumber" class="form-control" />
+                    <span asp-validation-for="CardNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Breed" class="control-label">Plemeno:</label>
+                    <input asp-for="Breed" class="form-control" />
+                    <span asp-validation-for="Breed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Sex" class="control-label">Pohlaví:</label>
+                    <select asp-for="Sex" class="form-control" asp-items="Html.GetEnumSelectList<Sex>()"></select>
+                    <span asp-validation-for="Sex" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label">Barva:</label>
+                    <input asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Popis:</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Note" class="control-label">Poznámka</label>
+                    <input asp-for="Note" class="form-control" />
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OwnerId" class="control-label">Majitel:</label>
+                    <select asp-for="OwnerId" class="form-control" asp-items="ViewBag.OwnerId"></select>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Vytvořit" class="btn btn-outline-success mb-2 mt-2" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-outline-primary">Zpět na seznam</a>
+</div>
+
+
+@*
+    <h1>Create</h1>
 
 <h4>Horse</h4>
 <hr />
@@ -82,5 +172,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+*@
 
 

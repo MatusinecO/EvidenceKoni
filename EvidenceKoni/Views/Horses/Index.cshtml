@@ -7,8 +7,9 @@
 
 <h1 class="text-center">Přehled koní</h1>
 
-<div class="text-center">
-    <a class="btn btn-outline-success" asp-action="Create">Přidat koně</a>
+<div class="btn btn-group">
+    <a class="btn btn-outline-dark" asp-action="Create">Přidat koně</a>
+    <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
 <table class="table table-striped">
@@ -18,9 +19,8 @@
             <th>@Html.DisplayNameFor(model => model.Breed)</th>
             <th>@Html.DisplayNameFor(model => model.Sex)</th>
             <th>@Html.DisplayNameFor(model => model.Color)</th>
-            <th>@Html.DisplayNameFor(model => model.CardNumber)</th
+            <th>@Html.DisplayNameFor(model => model.CardNumber)</th>
             <th>@Html.DisplayNameFor(model => model.Owners.FullName)</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -34,9 +34,12 @@
                 <td>@Html.DisplayFor(modelItem => item.CardNumber)</td>
                 <td>@item.Owners?.FullName</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                    <div class="btn btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                    </div>
+                    
                 </td>
             </tr>
         }

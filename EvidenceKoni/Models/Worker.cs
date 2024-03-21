@@ -14,37 +14,12 @@ namespace EvidenceKoni.Models
         [Display(Name ="Jiné")]
         Other
     }
-    public class Worker
+    public class Worker : User
     {
-        public int Id { get; set; }
-        [Display(Name ="Jméno")]
-        public string FirstName { get; set; } = "";
-        [Display(Name = "Příjmení")]
-        public string LastName { get; set; } = "";
+       
         [Display(Name = "Profese")]
         public Profession Profession { get; set; }
-        [Display(Name = "Adresa")]
-        public string Adress { get; set; } = "";
-        [Display(Name = "Město")]
-        public string City { get; set; } = "";
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Telefon")]
-        public string Phone { get; set; } = "";
-
-        [EmailAddress(ErrorMessage = "Neplatný formát e-mailové adresy")]
-        [Display(Name = "Email")]
-        public string Email { get; set; } = "";
-        [Display(Name = "Poznámka")]
-        [Required(AllowEmptyStrings =true)]
-        public string Note { get; set; } = "";
-        [Display(Name = "Jméno pracovníka")]
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
+       
         public ICollection<Procedure> Procedures { get; set; } = new List<Procedure>();
     }
 }

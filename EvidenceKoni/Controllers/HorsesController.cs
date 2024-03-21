@@ -46,28 +46,7 @@ namespace EvidenceKoni.Controllers
             return View(horse);
         }
         
-        /*
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var horse = await _context.Horse
-                .Include(s => s.Owners)
-                .ThenInclude(e => e.Stables)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (horse == null)
-            {
-                return NotFound();
-            }
-            return View();
-        }
-        */
-
+       
         // GET: Horses/Create
         public IActionResult Create()
         {

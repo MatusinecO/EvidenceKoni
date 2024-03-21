@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvidenceKoni.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240318133908_InitialMigration")]
+    [Migration("20240321090903_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -218,10 +218,6 @@ namespace EvidenceKoni.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -19,14 +19,33 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
+        public IActionResult Index(int pg = 1)
+        {
+            List<Owner> owners = _context.Owner.ToList();
+
+            const int pageSize = 6;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = owners.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg -1) * pageSize;
+            var data = owners.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+
+            //return View(owners);
+            return View(data);
+        }
+
+        /*
         // GET: Owners
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg=1)
         {
             return _context.Owner != null ?
                         View(await _context.Owner.ToListAsync()):
                           Problem("Entity set 'ApplicationDbContext.Owner'  is null.");
         }
-
+        */
         // GET: Owners/Details/5
         public async Task<IActionResult> Details(int? id)
         {

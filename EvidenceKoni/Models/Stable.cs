@@ -25,13 +25,13 @@ namespace EvidenceKoni.Models
         [Display(Name ="Frekvence plateb")]
         public Paid Paid { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                       ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",
+            ApplyFormatInEditMode = true)]
         [Display(Name = "Ustájen od")]
         public DateTime StabledFrom { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                       ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",
+            ApplyFormatInEditMode = true)]
         [Display(Name = "Ustájen do")]
         public DateTime StabledTo { get; set; }
         [Display(Name = "Poznámka")]

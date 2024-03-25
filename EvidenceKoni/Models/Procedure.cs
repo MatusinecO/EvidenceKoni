@@ -8,8 +8,8 @@ namespace EvidenceKoni.Models
         [Display(Name = "Popis zákroku")]
         public string Operation { get; set; } = "";
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                       ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",
+            ApplyFormatInEditMode = true)]
         [Display(Name = "Datum zákroku")]
         public DateTime DateOfProcedure { get; set; }
         [DataType(DataType.Currency)]

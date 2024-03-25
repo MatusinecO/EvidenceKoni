@@ -2,6 +2,16 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
 }
 
 
@@ -12,6 +22,8 @@
     <a class="btn btn-outline-dark" asp-action="Create">Nový pracovník</a>
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
+
+<partial name="_pager" model="@pager" />
 
 <table class="table table-striped">
     <thead>
@@ -48,6 +60,7 @@
     </tbody>
 </table>
 
+<partial name="_pager" model="@pager" />
 
 @*
     <h1>Index</h1>

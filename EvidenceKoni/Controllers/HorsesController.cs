@@ -19,13 +19,35 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
+        //Změna controlleru pro přidání pageru
+        //GET: Horses
+        public IActionResult Index(int pg = 1)
+        {
+            List<Horse> horses = _context.Horse.Include(s => s.Owners).ToList();
+
+            const int pageSize = 6;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = horses.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = horses.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+
+            //return View(horses);
+            return View(data);
+        }
+
+        /*
         // GET: Horses
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Horse.Include(h => h.Owners);
             return View(await applicationDbContext.ToListAsync());
         }
-        
+        */
+
         // GET: Horses/Details/5
         public async Task<IActionResult> Details(int? id)
         {

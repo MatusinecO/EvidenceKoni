@@ -20,8 +20,8 @@ namespace EvidenceKoni.Models
         [Display(Name ="Jméno koně")]
         public string Name { get; set; } = "";
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                       ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", 
+            ApplyFormatInEditMode = true)]
         [Display(Name = "Datum narození")]
         public DateTime BirthDate { get; set; }
         [Display(Name = "Výžeh")]

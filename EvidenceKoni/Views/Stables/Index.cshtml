@@ -2,6 +2,16 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
 }
 
 <h1 class="text-center">Přehled ustájení</h1>
@@ -11,14 +21,17 @@
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
+<partial name="_pager" model="@pager" />
+
 <table class="table table-striped">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Note)</th>
+            <th>@Html.DisplayNameFor(model => model.Owners.FullName)</th>
             <th>@Html.DisplayNameFor(model => model.Paid)</th>
             <th>@Html.DisplayNameFor(model => model.StabledFrom)</th>
             <th>@Html.DisplayNameFor(model => model.StabledTo)</th>
-            <th>@Html.DisplayNameFor(model => model.Owners.FullName)</th>
             <th></th>
         </tr>
     </thead>
@@ -27,10 +40,11 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                <td>@Html.DisplayFor(model => item.Owners.FullName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Paid)</td>
                 <td>@Html.DisplayFor(modelItem => item.StabledFrom)</td>
                 <td>@Html.DisplayFor(modelItem => item.StabledTo)</td>
-                <td>@item.Owners?.FullName</td>
                 <td>
                     <div class="btn btn-group">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
@@ -43,6 +57,8 @@
         }
     </tbody>
 </table>
+
+<partial name="_pager" model="@pager" />
 
 @*
     <table class="table">

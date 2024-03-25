@@ -19,13 +19,49 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
+
+        public async Task<IActionResult> Index(string SearchString)
+        {
+            ViewData["CurrentFilter"] = SearchString;
+            var procedures = from o in _context.Procedure.Include(p => p.Horse).Include(p => p.Worker)
+                             select o;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                procedures = procedures.Where(p => p.Horse.Name.Equals(SearchString));
+            }
+            return View(await procedures.ToListAsync());
+        }
+
+
+        /*
+        //Změna controlleru pro přidání pageru
+        //GET: Procedures
+        public IActionResult Index(int pg = 1)
+        {
+            List<Procedure> procedures = _context.Procedure.ToList();
+
+            const int pageSize = 6;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = procedures.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = procedures.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+
+            //return View(procedures);
+            return View(data);
+        }
+        */
+        /*
         // GET: Procedures
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Procedure.Include(p => p.Horse).Include(p => p.Worker);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        */
         // GET: Procedures/Details/5
         public async Task<IActionResult> Details(int? id)
         {

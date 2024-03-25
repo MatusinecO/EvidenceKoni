@@ -19,6 +19,8 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
+        //Změna controlleru pro přidání pageru
+        //GET: Owners
         public IActionResult Index(int pg = 1)
         {
             List<Owner> owners = _context.Owner.ToList();
@@ -36,6 +38,7 @@ namespace EvidenceKoni.Controllers
             //return View(owners);
             return View(data);
         }
+
 
         /*
         // GET: Owners

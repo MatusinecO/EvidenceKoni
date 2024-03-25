@@ -17,7 +17,7 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
                     <label asp-for="FirstName" class="control-label">Jméno:</label>
-                    <select asp-for="FirstName" class="form-control" asp-items="Html.GetEnumSelectList<Paid>()"></select>
+                    <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">

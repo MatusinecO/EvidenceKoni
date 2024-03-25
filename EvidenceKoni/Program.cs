@@ -43,8 +43,8 @@ namespace EvidenceKoni
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"); //--> zmìnìn routing na Home/Index
-                //pattern: "{controller=Owners}/{action=Index}/{id?}"); // --> jako výchozí bude Owners
+                //pattern: "{controller=Home}/{action=Index}/{id?}"); //--> zmìnìn routing na Home/Index
+                pattern: "{controller=Owners}/{action=Index}/{id?}"); // --> jako výchozí bude Owners
             app.MapRazorPages();
 
             app.Run();

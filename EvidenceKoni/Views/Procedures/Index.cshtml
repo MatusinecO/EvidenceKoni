@@ -6,10 +6,23 @@
 
 <h1 class="text-center">Přehled procedur</h1>
 
+
 <div class="btn btn-group">
     <a class="btn btn-outline-dark" asp-action="Create">Nová procedura</a>
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="SearchString">Vyhledat podle koně:</label>
+        <input type="text" name="SearchString"
+               value="@ViewData["CurrentFilter"]" />
+        <div class="btn btn-group">
+            <input type="submit" value="Vyhledat" class="btn btn-outline-dark" />
+            <a class="btn btn-outline-dark" asp-action="Index">Zpět na seznam</a>
+        </div>
+    </div>
+</form>
 
 <table class="table table-striped">
     <thead>
@@ -31,8 +44,8 @@
                 <td>@Html.DisplayFor(modelItem => item.DateOfProcedure)</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                <td>@item.Horse?.Name</td>
-                <td>@item.Worker?.FullName</td>
+                <td>@Html.DisplayFor(model => item.Horse.Name)</td>
+                <td>@Html.DisplayFor(model => item.Worker.FullName)</td>
                 <td>
                     <div class="btn btn-group">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
@@ -45,6 +58,9 @@
         }
     </tbody>
 </table>
+
+
+
 
 @*
     <h1>Index</h1>

@@ -19,6 +19,27 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
+        //Změna controlleru pro přidání pageru
+        //GET: Workers
+        public IActionResult Index(int pg = 1)
+        {
+            List<Worker> workers = _context.Worker.ToList();
+
+            const int pageSize = 6;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = workers.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = workers.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+
+            //return View(workers);
+            return View(data);
+        }
+
+        /*
         // GET: Workers
         public async Task<IActionResult> Index()
         {
@@ -26,6 +47,7 @@ namespace EvidenceKoni.Controllers
                           View(await _context.Worker.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Worker'  is null.");
         }
+        */
 
         // GET: Workers/Details/5
         public async Task<IActionResult> Details(int? id)

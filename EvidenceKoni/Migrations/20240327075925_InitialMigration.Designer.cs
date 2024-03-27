@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvidenceKoni.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240321090903_InitialMigration")]
+    [Migration("20240327075925_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

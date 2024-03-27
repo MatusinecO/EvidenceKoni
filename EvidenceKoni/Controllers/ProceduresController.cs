@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EvidenceKoni.Data;
 using EvidenceKoni.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EvidenceKoni.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class ProceduresController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,7 +21,7 @@ namespace EvidenceKoni.Controllers
             _context = context;
         }
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string SearchString)
         {
             ViewData["CurrentFilter"] = SearchString;
@@ -63,6 +65,8 @@ namespace EvidenceKoni.Controllers
         }
         */
         // GET: Procedures/Details/5
+
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Procedure == null)

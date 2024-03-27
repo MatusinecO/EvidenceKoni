@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EvidenceKoni.Data;
 using EvidenceKoni.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EvidenceKoni.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class StablesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,11 +23,12 @@ namespace EvidenceKoni.Controllers
 
         //Změna controlleru pro přidání pageru
         //GET: Stables
+        [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
             List<Stable> stables = _context.Stable.Include(s => s.Owners).ToList();
 
-            const int pageSize = 6;
+            const int pageSize = 5;
             if (pg < 1)
                 pg = 1;
 
@@ -49,6 +52,7 @@ namespace EvidenceKoni.Controllers
         */
 
         // GET: Stables/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Stable == null)

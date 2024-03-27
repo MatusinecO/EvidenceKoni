@@ -17,11 +17,52 @@
 <h1 class="text-center">Přehled ustájení</h1>
 
 <div class="btn btn-group">
-    <a class="btn btn-outline-dark" asp-action="Create">Nové ustájení</a>
+    @if (User.IsInRole(UserRoles.Admin))
+    {
+        <a class="btn btn-outline-dark" asp-action="Create">Nové ustájení</a>
+    }
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
-<partial name="_pager" model="@pager" />
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Stables" asp-action="Index" asp-route-pg="1">První</a>
+                </li>
+                <li>
+                    <a class="page-link" asp-controller="Stables" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1)">Předchozí</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage ? "active" :"")">
+                    <a class="page-link" asp-controller="Stables" asp-action="Index" asp-route-pg="@pge">@pge</a>
+
+                </li>
+            }
+
+            @if (pager.CurrentPage < pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Stables" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">Další</a>
+                </li>
+                <li>
+                    <a class="page-link" asp-controller="Stables" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Poslední</a>
+                </li>
+            }
+
+
+        </ul>
+    }
+
+</div>
+
 
 <table class="table table-striped">
     <thead>
@@ -47,9 +88,13 @@
                 <td>@Html.DisplayFor(modelItem => item.StabledTo)</td>
                 <td>
                     <div class="btn btn-group">
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                        @if (User.IsInRole(UserRoles.Admin))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                        }
+                        
                     </div>
                     
                 </td>
@@ -58,7 +103,8 @@
     </tbody>
 </table>
 
-<partial name="_pager" model="@pager" />
+
+
 
 @*
     <table class="table">

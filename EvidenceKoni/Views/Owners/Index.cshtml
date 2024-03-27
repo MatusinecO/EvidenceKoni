@@ -16,7 +16,10 @@
 
 
 <div class="btn btn-group">
-    <a class="btn btn-outline-dark" asp-action="Create">Nový majitel</a>
+    @if (User.IsInRole(UserRoles.Admin))
+    {
+        <a class="btn btn-outline-dark" asp-action="Create">Nový majitel</a>
+    }
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
@@ -40,8 +43,11 @@
                     <div class="card-footer" align="center">
                         <div class="btn btn-group justify-content-center">
                             <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Detaily</a>
-                            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.Id">Upravit</a>
-                            <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
+                            @if (User.IsInRole(UserRoles.Admin))
+                            {
+                                <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.Id">Upravit</a>
+                                <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.Id">Smazat</a>
+                            }
                         </div>
                     </div>
                 </div>

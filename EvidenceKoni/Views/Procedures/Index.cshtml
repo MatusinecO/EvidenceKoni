@@ -8,7 +8,10 @@
 
 
 <div class="btn btn-group">
-    <a class="btn btn-outline-dark" asp-action="Create">Nová procedura</a>
+    @if (User.IsInRole(UserRoles.Admin))
+    {
+        <a class="btn btn-outline-dark" asp-action="Create">Nová procedura</a>
+    }
     <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Hlavní stránka</a>
 </div>
 
@@ -48,9 +51,13 @@
                 <td>@Html.DisplayFor(model => item.Worker.FullName)</td>
                 <td>
                     <div class="btn btn-group">
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">Detaily</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                        @if (User.IsInRole(UserRoles.Admin))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Upravit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Smazat</a>
+                        }
+                        
                     </div>
                     
                 </td>

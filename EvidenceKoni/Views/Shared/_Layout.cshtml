@@ -20,24 +20,42 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Owners" asp-action="Index">Majitelé</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Horses" asp-action="Index">Koně</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Procedures" asp-action="Index">Procedury</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Stables" asp-action="index">Ustájení</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Workers" asp-action="index">Pracovníci</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+                    <!--Lišta se zobrazí pouze přihlášenému-->
+                    @if (User?.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Owners" asp-action="Index">Majitelé</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Horses" asp-action="Index">Koně</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Procedures" asp-action="Index">Procedury</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Stables" asp-action="index">Ustájení</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Workers" asp-action="index">Pracovníci</a>
+                            </li>
+                        </ul>
+                    }
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav">
+                        </ul>
+                        <div class="navbar-nav ml-auto">
+                            @if (User?.Identity?.IsAuthenticated == true)
+                            {
+                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Odhlásit</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">Přihlásit</a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Register">Registrovat</a>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -51,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p>&copy; <span id="current-year">2024</span> - Evidence Koní - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+                    <p>&copy; <span id="current-year">2024</span> - Evidence Koní - <a asp-controller="Home" asp-action="Index">Hlavní strana</a></p>
                 </div>
 
                 <script>

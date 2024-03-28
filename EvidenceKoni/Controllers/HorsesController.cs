@@ -80,6 +80,29 @@ namespace EvidenceKoni.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,BirthDate,Burn,Chip,LifeNumber,CardNumber,Breed,Sex,Color,Description,Note,OwnerId")] Horse horse)
+        {
+            if (ModelState.IsValid)
+            {
+                if (horse.OwnerId == null)
+                {
+                    // Add error to ModelState
+                    ModelState.AddModelError("OwnerId", "Pro přidaní koně vytvořte majitele.");
+                    ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName", horse.OwnerId);
+                    return View(horse);
+                }
+
+                _context.Add(horse);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(horse);
+        }
+
+        /*
         // POST: Horses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -96,7 +119,7 @@ namespace EvidenceKoni.Controllers
             ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName", horse.OwnerId);
             return View(horse);
         }
-
+        */
         // GET: Horses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -42,7 +42,7 @@ namespace EvidenceKoni.Models
         public string Description { get; set; } = "";
         [Display(Name = "Poznámka")]
         public string Note { get; set; } = "";
-        public int OwnerId { get; set; }
+        public int? OwnerId { get; set; }
         public Owner? Owners { get; set; }
         public ICollection<Procedure>? Procedures { get; set; } = new List<Procedure>();
         //public ICollection<Procedure>? Procedures { get; set; }

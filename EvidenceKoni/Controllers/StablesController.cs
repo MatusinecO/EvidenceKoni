@@ -79,6 +79,31 @@ namespace EvidenceKoni.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId")] Stable stable)
+        {
+            if (ModelState.IsValid)
+            {
+                var owner = await _context.Owner.FindAsync(stable.OwnerId);
+                if (owner == null)
+                {
+                    // Majitel v databázi neexistuje:
+                    ModelState.AddModelError("OwnerId", "K vytvoření ustájení je nutné mít přiřazeného majitele.");
+                    return View(stable);
+                }
+
+                _context.Add(stable);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FirstName", stable.OwnerId);
+            return View(stable);
+        }
+
+        /*
         // POST: Stables/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -95,7 +120,7 @@ namespace EvidenceKoni.Controllers
             ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FirstName", stable.OwnerId);
             return View(stable);
         }
-
+        */
         // GET: Stables/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

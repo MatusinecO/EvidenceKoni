@@ -31,59 +31,9 @@
 
 <div class="d-flex justify-content-between align-items-center">
     <div class="me-2">
-        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.Id">Upravit</a>
-        <a class="btn btn-outline-primary" asp-action="Index">Zpět na seznam</a>
+        <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model?.Id">Upravit</a>
+        <a class="btn btn-outline-dark" asp-action="Index">Zpět na seznam</a>
     </div>
 </div>
 
-@*
-<div>
-    <h4>Stable</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Paid)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Paid)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StabledFrom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StabledFrom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StabledTo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StabledTo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Owners)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(modelItem => Model.Owners.FullName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-<a class="text-decoration-none text-success" asp-controller="Owners" asp-action="Index"><strong>Zpět na přehled majitelů</strong></a>
-
-*@
 

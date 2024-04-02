@@ -1,4 +1,4 @@
-html {
+    html {
   font-size: 14px;
 }
 
@@ -21,14 +21,14 @@ body {
     background: linear-gradient(to bottom, #ffffff, #cccccc);
 }
 
-/*
+
     body {
     background-image: url('/images/WP1.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size:contain
 }
-*/
+
     
 
 
@@ -86,6 +86,7 @@ body {
 .footer-icon:hover {
     color: #333;
 }
+
 
 
 

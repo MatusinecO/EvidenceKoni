@@ -42,14 +42,6 @@ namespace EvidenceKoni.Controllers
             return View(data);
         }
 
-        /*
-        // GET: Horses
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Horse.Include(h => h.Owners);
-            return View(await applicationDbContext.ToListAsync());
-        }
-        */
 
         // GET: Horses/Details/5
         [AllowAnonymous]
@@ -173,6 +165,9 @@ namespace EvidenceKoni.Controllers
             return View(horse);
         }
 
+
+
+        
         // GET: Horses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -182,7 +177,6 @@ namespace EvidenceKoni.Controllers
             }
 
             var horse = await _context.Horse
-                .Include(h => h.Owners)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (horse == null)
             {
@@ -191,7 +185,7 @@ namespace EvidenceKoni.Controllers
 
             return View(horse);
         }
-
+        
         // POST: Horses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -215,5 +209,8 @@ namespace EvidenceKoni.Controllers
         {
           return (_context.Horse?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        
+
     }
 }

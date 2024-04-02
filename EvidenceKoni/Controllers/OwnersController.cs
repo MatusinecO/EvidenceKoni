@@ -155,6 +155,8 @@ namespace EvidenceKoni.Controllers
             }
 
             var owner = await _context.Owner
+                .Include(p=>p.Horses)
+                .Include(p=>p.Stables)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
@@ -163,6 +165,8 @@ namespace EvidenceKoni.Controllers
 
             return View(owner);
         }
+
+
 
         // POST: Owners/Delete/5
         [HttpPost, ActionName("Delete")]

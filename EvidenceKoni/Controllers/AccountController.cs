@@ -69,7 +69,7 @@ namespace EvidenceKoni.Controllers
 
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                IdentityUser user = new() { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

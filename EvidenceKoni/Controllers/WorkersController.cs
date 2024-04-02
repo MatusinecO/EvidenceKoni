@@ -84,7 +84,7 @@ namespace EvidenceKoni.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Profession,Adress,Phone,Email,Note")] Worker worker)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Profession,Adress,City,Phone,Email")] Worker worker)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace EvidenceKoni.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Profession,Adress,Phone,Email,Note")] Worker worker)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Profession,Adress,City,Phone,Email")] Worker worker)
         {
             if (id != worker.Id)
             {

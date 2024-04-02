@@ -12,7 +12,6 @@
                 <th>@Html.DisplayNameFor(model => model.Operation)</th>
                 <th>@Html.DisplayNameFor(model => model.DateOfProcedure)</th>
                 <th>@Html.DisplayNameFor(model => model.Price)</th>
-                <th>@Html.DisplayNameFor(model => model.Note)</th>
                 <th>@Html.DisplayNameFor(model => model.Horse.Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Worker.FullName)</th>
             </tr>
@@ -22,7 +21,6 @@
                 <td>@Html.DisplayFor(model => model.Operation)</td>
                 <td>@Html.DisplayFor(model => model.DateOfProcedure)</td>
                 <td>@Html.DisplayFor(model => model.Price)</td>
-                <td>@Html.DisplayFor(model => model.Note)</td>
                 <td>@Html.DisplayFor(model => model.Horse.Name)</td>
                 <td>@Html.DisplayFor(model => model.Worker.FullName)</td>
             </tr>
@@ -35,58 +33,3 @@
         <a class="btn btn-outline-primary" asp-action="Index">Zpět na seznam</a>
     </div>
 </div>
-
-
-@*
-    <h1>Details</h1>
-
-<div>
-    <h4>Procedure</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Operation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Operation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfProcedure)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfProcedure)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Horse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Horse.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Worker)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Worker.FullName)
-        </dd>
-    </dl>
-</div>
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-
-*@
-

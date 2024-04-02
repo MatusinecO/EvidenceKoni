@@ -65,11 +65,7 @@ namespace EvidenceKoni.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<int>("Sex")
@@ -132,10 +128,6 @@ namespace EvidenceKoni.Migrations
 
                     b.Property<int?>("HorseId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Operation")
                         .IsRequired()
@@ -375,12 +367,10 @@ namespace EvidenceKoni.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -417,12 +407,10 @@ namespace EvidenceKoni.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -437,8 +425,7 @@ namespace EvidenceKoni.Migrations
                     b.HasOne("EvidenceKoni.Models.Owner", "Owners")
                         .WithMany("Horses")
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Owners");
                 });
@@ -447,11 +434,13 @@ namespace EvidenceKoni.Migrations
                 {
                     b.HasOne("EvidenceKoni.Models.Horse", "Horse")
                         .WithMany("Procedures")
-                        .HasForeignKey("HorseId");
+                        .HasForeignKey("HorseId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("EvidenceKoni.Models.Worker", "Worker")
                         .WithMany("Procedures")
-                        .HasForeignKey("WorkerId");
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Horse");
 

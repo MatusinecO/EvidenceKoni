@@ -29,41 +29,13 @@ namespace EvidenceKoni.Controllers
                              select o;
             if (!String.IsNullOrEmpty(SearchString?.Trim()))
             {
-                procedures = procedures.Where(p => p.Horse.Name.ToLower().Contains(SearchString.Trim().ToLower()));
+                procedures = procedures.Where(p => p.Horse.Name.ToLower().Contains(SearchString.Trim().ToLower()))
+                                .OrderByDescending(p => p.DateOfProcedure);
             }
             return View(await procedures.ToListAsync());
         }
 
 
-        /*
-        //Změna controlleru pro přidání pageru
-        //GET: Procedures
-        public IActionResult Index(int pg = 1)
-        {
-            List<Procedure> procedures = _context.Procedure.ToList();
-
-            const int pageSize = 6;
-            if (pg < 1)
-                pg = 1;
-
-            int recsCount = procedures.Count;
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-            var data = procedures.Skip(recSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-
-            //return View(procedures);
-            return View(data);
-        }
-        */
-        /*
-        // GET: Procedures
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Procedure.Include(p => p.Horse).Include(p => p.Worker);
-            return View(await applicationDbContext.ToListAsync());
-        }
-        */
         // GET: Procedures/Details/5
 
         [AllowAnonymous]
@@ -176,8 +148,6 @@ namespace EvidenceKoni.Controllers
             }
 
             var procedure = await _context.Procedure
-                .Include(p => p.Horse)
-                .Include(p => p.Worker)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (procedure == null)
             {

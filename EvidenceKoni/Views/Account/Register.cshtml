@@ -9,22 +9,22 @@
         <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label for="Email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="Email" asp-for="Email" required />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <label for="Password" class="form-label">Heslo:</label>
+                <input type="password" class="form-control" id="Password" asp-for="Password" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
+                <label for="ConfirmPassword" class="form-label">Potvrzení hesla:</label>
+                <input type="password" class="form-control" id="ConfirmPassword" asp-for="ConfirmPassword" required />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="clanky-tlacitko">Registrovat</button>
+                <button type="submit" class="btn btn-primary clanky-tlacitko">Registrovat</button>
             </div>
         </form>
     </div>

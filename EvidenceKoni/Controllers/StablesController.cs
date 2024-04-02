@@ -183,7 +183,7 @@ namespace EvidenceKoni.Controllers
             }
 
             var stable = await _context.Stable
-                .Include(s => s.Owners)
+                //.Include(s => s.Owners)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (stable == null)
             {

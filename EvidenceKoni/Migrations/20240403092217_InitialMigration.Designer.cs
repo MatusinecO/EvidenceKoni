@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvidenceKoni.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240402090052_InitialMig")]
-    partial class InitialMig
+    [Migration("20240403092217_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,6 +159,9 @@ namespace EvidenceKoni.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("HorseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -179,6 +182,8 @@ namespace EvidenceKoni.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HorseId");
 
                     b.HasIndex("OwnerId");
 
@@ -443,7 +448,7 @@ namespace EvidenceKoni.Migrations
                     b.HasOne("EvidenceKoni.Models.Worker", "Worker")
                         .WithMany("Procedures")
                         .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Horse");
 
@@ -452,11 +457,18 @@ namespace EvidenceKoni.Migrations
 
             modelBuilder.Entity("EvidenceKoni.Models.Stable", b =>
                 {
+                    b.HasOne("EvidenceKoni.Models.Horse", "Horse")
+                        .WithMany("Stables")
+                        .HasForeignKey("HorseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EvidenceKoni.Models.Owner", "Owners")
                         .WithMany("Stables")
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Horse");
 
                     b.Navigation("Owners");
                 });
@@ -515,6 +527,8 @@ namespace EvidenceKoni.Migrations
             modelBuilder.Entity("EvidenceKoni.Models.Horse", b =>
                 {
                     b.Navigation("Procedures");
+
+                    b.Navigation("Stables");
                 });
 
             modelBuilder.Entity("EvidenceKoni.Models.Owner", b =>

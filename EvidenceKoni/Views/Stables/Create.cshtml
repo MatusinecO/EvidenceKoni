@@ -51,6 +51,12 @@
                     </select>
                     <span asp-validation-for="OwnerId" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="HorseId" class="control-label">Kůň</label>
+                    <select asp-for="HorseId" class="form-control" asp-items="ViewBag.HorseId">
+                    </select>
+                    <span asp-validation-for="HorseId" class="text-danger"></span>
+                </div>
                 <div class="form-group text-center">
                     <input type="submit" value="Vytvořit" class="btn btn-outline-dark mb-2 mt-2" />
                 </div>

@@ -15,6 +15,7 @@
             <th>@Html.DisplayNameFor(model => model.StabledTo)</th>
             <th>@Html.DisplayNameFor(model => model.Note)</th>
             <th>@Html.DisplayNameFor(model => model.Owners.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.Horse.Name)</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
             <td>@Html.DisplayFor(model => model.StabledTo)</td>
             <td>@Html.DisplayFor(model => model.Note)</td>
             <td>@Html.DisplayFor(modelItem => Model.Owners.FullName)</td>
+            <td>@Html.DisplayFor(modelItem => Model.Horse.Name)</td>
         </tr>
     </tbody>
 </table>

@@ -53,5 +53,6 @@ namespace EvidenceKoni.Models
         public int? OwnerId { get; set; }
         public Owner? Owners { get; set; }
         public ICollection<Procedure> Procedures { get; set; } = new List<Procedure>();
+        public ICollection<Stable> Stables { get; set; } = new List<Stable>();
     }
 }

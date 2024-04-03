@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EvidenceKoni.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMig : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -223,30 +223,6 @@ namespace EvidenceKoni.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stable",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Paid = table.Column<int>(type: "int", nullable: false),
-                    StabledFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StabledTo = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stable", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Stable_Owner_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owner",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Procedure",
                 columns: table => new
                 {
@@ -272,7 +248,37 @@ namespace EvidenceKoni.Migrations
                         column: x => x.WorkerId,
                         principalTable: "Worker",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Paid = table.Column<int>(type: "int", nullable: false),
+                    StabledFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StabledTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: false),
+                    HorseId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stable", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stable_Horse_HorseId",
+                        column: x => x.HorseId,
+                        principalTable: "Horse",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stable_Owner_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owner",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -330,6 +336,11 @@ namespace EvidenceKoni.Migrations
                 column: "WorkerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Stable_HorseId",
+                table: "Stable",
+                column: "HorseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stable_OwnerId",
                 table: "Stable",
                 column: "OwnerId");
@@ -366,10 +377,10 @@ namespace EvidenceKoni.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Horse");
+                name: "Worker");
 
             migrationBuilder.DropTable(
-                name: "Worker");
+                name: "Horse");
 
             migrationBuilder.DropTable(
                 name: "Owner");

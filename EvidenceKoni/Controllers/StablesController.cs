@@ -26,7 +26,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Stable> stables = _context.Stable.Include(s => s.Owners).ToList();
+            List<Stable> stables = _context.Stable.Include(s => s.Owners).Include(s => s.Horse).ToList();/////
 
             const int pageSize = 5;
             if (pg < 1)
@@ -62,7 +62,7 @@ namespace EvidenceKoni.Controllers
 
             var stable = await _context.Stable
                 .Include(s => s.Owners)
-                .ThenInclude(c=>c.Horses)
+                .Include(c=>c.Horse)/////
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (stable == null)
             {
@@ -76,13 +76,14 @@ namespace EvidenceKoni.Controllers
         public IActionResult Create()
         {
             ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName");
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name");
             return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId")] Stable stable)
+        public async Task<IActionResult> Create([Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId,HorseId")] Stable stable)/////////
         {
             if (ModelState.IsValid)
             {
@@ -100,27 +101,11 @@ namespace EvidenceKoni.Controllers
             }
 
             ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FirstName", stable.OwnerId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", stable.HorseId);
             return View(stable);
         }
 
-        /*
-        // POST: Stables/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId")] Stable stable)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(stable);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FirstName", stable.OwnerId);
-            return View(stable);
-        }
-        */
+        
         // GET: Stables/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -135,6 +120,7 @@ namespace EvidenceKoni.Controllers
                 return NotFound();
             }
             ViewData["OwnerId"] = new SelectList(_context.Owner, "Id", "FullName", stable.OwnerId);
+            ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", stable.HorseId);  ////////
             return View(stable);
         }
 
@@ -143,7 +129,7 @@ namespace EvidenceKoni.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId")] Stable stable)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Price,Paid,StabledFrom,StabledTo,Note,OwnerId,HorseId")] Stable stable)///////
         {
             if (id != stable.Id)
             {

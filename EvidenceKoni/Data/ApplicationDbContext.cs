@@ -36,7 +36,7 @@ namespace EvidenceKoni.Data
                 .HasOne<Worker>(p => p.Worker)
                 .WithMany(w => w.Procedures)
                 .HasForeignKey(p => p.WorkerId)
-                .OnDelete(DeleteBehavior.SetNull); // set the OnDelete behavior to SetNull
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Stable>()
                 .HasOne<Owner>(s => s.Owners)
@@ -44,7 +44,6 @@ namespace EvidenceKoni.Data
                 .HasForeignKey(s => s.OwnerId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            // add the Worker entity and its relationships
             modelBuilder.Entity<Worker>()
                 .HasMany<Procedure>(w => w.Procedures)
                 .WithOne(p => p.Worker)

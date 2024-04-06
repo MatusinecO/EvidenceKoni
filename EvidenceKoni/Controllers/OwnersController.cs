@@ -43,15 +43,6 @@ namespace EvidenceKoni.Controllers
         }
 
 
-        /*
-        // GET: Owners
-        public async Task<IActionResult> Index(int pg=1)
-        {
-            return _context.Owner != null ?
-                        View(await _context.Owner.ToListAsync()):
-                          Problem("Entity set 'ApplicationDbContext.Owner'  is null.");
-        }
-        */
         // GET: Owners/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)

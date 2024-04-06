@@ -22,8 +22,7 @@ namespace EvidenceKoni.Models
         [Required(ErrorMessage = "Zadejte jméno.")]
         public string Name { get; set; } = "";
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", 
-            ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum narození")]
         [Required(ErrorMessage = "Zadejte datum narození.")]
         public DateTime BirthDate { get; set; }

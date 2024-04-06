@@ -4,7 +4,7 @@
     ViewData["Title"] = "Info o koni";
 }
 
-<h1>Kůň</h1>
+<h1>Detail</h1>
 
 <div class="row">
     <div class="col-6">
@@ -76,7 +76,7 @@
     <div class="col-6">
         <h4>Procedury</h4>
         <hr/>
-        @foreach(var procedure in Model.Procedures)
+        @foreach(var procedure in Model.Procedures.OrderByDescending(p => p.DateOfProcedure).Take(3))
         {
             <div class="border border-dark border-2">
 				<dl class="row">
@@ -106,7 +106,7 @@
             
            
         }
-
+    <br />
     </div>
     <a class="btn btn-outline-dark" asp-controller="Horses" asp-action="Index">Zpět na přehled</a>
 </div>

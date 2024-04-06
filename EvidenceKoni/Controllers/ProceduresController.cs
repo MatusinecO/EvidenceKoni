@@ -27,10 +27,10 @@ namespace EvidenceKoni.Controllers
             ViewData["CurrentFilter"] = SearchString;
             var procedures = from o in _context.Procedure.Include(p => p.Horse).Include(p => p.Worker)
                              select o;
+            procedures = procedures.OrderByDescending(p => p.DateOfProcedure); // Add this line
             if (!String.IsNullOrEmpty(SearchString?.Trim()))
             {
-                procedures = procedures.Where(p => p.Horse.Name.ToLower().Contains(SearchString.Trim().ToLower()))
-                                .OrderByDescending(p => p.DateOfProcedure);
+                procedures = procedures.Where(p => p.Horse.Name.ToLower().Contains(SearchString.Trim().ToLower()));
             }
             return View(await procedures.ToListAsync());
         }

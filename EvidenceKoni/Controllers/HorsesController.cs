@@ -54,7 +54,7 @@ namespace EvidenceKoni.Controllers
 
             var horse = await _context.Horse
                 .Include(h => h.Owners)
-                .Include(p => p.Procedures)               // --> přidal sem procedury
+                .Include(p => p.Procedures)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (horse == null)
             {
@@ -94,24 +94,7 @@ namespace EvidenceKoni.Controllers
             return View(horse);
         }
 
-        /*
-        // POST: Horses/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,BirthDate,Burn,Chip,LifeNumber,CardNumber,Breed,Sex,Color,Description,Note,OwnerId")] Horse horse)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(horse);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["OwnerId"] = new SelectList(_context.Set<Owner>(), "Id", "FullName", horse.OwnerId);
-            return View(horse);
-        }
-        */
+       
         // GET: Horses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

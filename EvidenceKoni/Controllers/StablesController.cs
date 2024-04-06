@@ -42,14 +42,6 @@ namespace EvidenceKoni.Controllers
             return View(data);
         }
 
-        /*
-        // GET: Stables
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Stable.Include(s => s.Owners);
-            return View(await applicationDbContext.ToListAsync());
-        }
-        */
 
         // GET: Stables/Details/5
         [AllowAnonymous]

@@ -12,22 +12,22 @@
 
 <div class="row">
     <div class="col-md-4">
-        <table class="table table-borderless">
+        <table class="table table-bordered table-hover">
             <tbody>
                 <tr>
-                    <th>Telefon:</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Telefon:</th>
                     <td>@Model.Phone</td>
                 </tr>
                 <tr>
-                    <th>E-mail:</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">E-mail:</th>
                     <td>@Model.Email</td>
                 </tr>
                 <tr>
-                    <th>Adresa:</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Adresa:</th>
                     <td>@Model.Adress</td>
                 </tr>
                 <tr>
-                    <th>Město:</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Město:</th>
                     <td>@Model.City</td>
                 </tr>
             </tbody>
@@ -37,21 +37,21 @@
 
     <div class="col-md-8">
         <h3>Koně</h3>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Jméno</th>
-                    <th>Datum narození</th>
-                    <th>Barva</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Jméno</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Datum narození</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Barva</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var horse in Model.Horses)
                 {
                     <tr>
-                        <td><a class="text-decoration-none text-success" asp-controller="Horses" asp-action="Details" asp-route-id="@horse.Id"><strong>@horse.Name</strong></a></td>
-                        <td>@horse.BirthDate.ToShortDateString()</td>
-                        <td>@horse.Color</td>
+                        <td style="padding: 10px;"><a class="text-decoration-none text-success" asp-controller="Horses" asp-action="Details" asp-route-id="@horse.Id"><strong>@horse.Name</strong></a></td>
+                        <td style="padding: 10px;">@horse.BirthDate.ToShortDateString()</td>
+                        <td style="padding: 10px;">@horse.Color</td>
                     </tr>
                 }
             </tbody>
@@ -60,13 +60,13 @@
 
     <div class="col-md-8">
         <h3>Ustájení</h3>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Ustájený od</th>
-                    <th>Ustájený do</th>
-                    <th>Cena</th>
-                    <th>Platba</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Frekvence platby</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Ustájený od</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Ustájený do</th>
+                    <th style="background-color: #f8f9fa; font-weight: bold; padding: 10px;">Cena</th>
                 </tr>
             </thead>
             <tbody>

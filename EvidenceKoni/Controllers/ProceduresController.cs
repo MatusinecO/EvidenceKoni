@@ -77,6 +77,9 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Add(procedure);
                 await _context.SaveChangesAsync();
+
+                TempData["message"] = "Nová procedura úspěšně uložena";
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["HorseId"] = new SelectList(_context.Horse, "Id", "Name", procedure.HorseId);
@@ -120,6 +123,8 @@ namespace EvidenceKoni.Controllers
                 {
                     _context.Update(procedure);
                     await _context.SaveChangesAsync();
+
+                    TempData["message"] = "Záznam o proceduře byl úspěšné uložen";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -173,6 +178,9 @@ namespace EvidenceKoni.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            TempData["message"] = "Procedura byla úspěšně odstraněna";
+
             return RedirectToAction(nameof(Index));
         }
 

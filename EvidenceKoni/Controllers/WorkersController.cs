@@ -26,7 +26,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Worker> workers = _context.Worker.ToList();
+            List<Worker> workers = _context.Worker.OrderByDescending(o=>o.Id).ToList();
 
             const int pageSize = 5;
             if (pg < 1)
@@ -90,6 +90,9 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Add(worker);
                 await _context.SaveChangesAsync();
+
+                TempData["message"] = "Nový pracovník byl úspěšně vytvořen";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(worker);
@@ -129,6 +132,8 @@ namespace EvidenceKoni.Controllers
                 {
                     _context.Update(worker);
                     await _context.SaveChangesAsync();
+
+                    TempData["message"] = "Data o pracovníkovi byla úspěšně upravena";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -180,6 +185,9 @@ namespace EvidenceKoni.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            TempData["message"] = "Pracovník byl úspěšně odstraněn";
+
             return RedirectToAction(nameof(Index));
         }
 

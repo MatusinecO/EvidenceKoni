@@ -26,7 +26,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Stable> stables = _context.Stable.Include(s => s.Owners).Include(s => s.Horse).ToList();/////
+            List<Stable> stables = _context.Stable.OrderByDescending(o=>o.Id).Include(s => s.Owners).Include(s => s.Horse).ToList();/////
 
             const int pageSize = 5;
             if (pg < 1)
@@ -89,6 +89,9 @@ namespace EvidenceKoni.Controllers
 
                 _context.Add(stable);
                 await _context.SaveChangesAsync();
+
+                TempData["message"] = "Ustájení bylo úspěšné přidáno";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -134,6 +137,8 @@ namespace EvidenceKoni.Controllers
                 {
                     _context.Update(stable);
                     await _context.SaveChangesAsync();
+
+                    TempData["message"] = "Data o ustájení byla úspěšsně upravena";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -187,6 +192,9 @@ namespace EvidenceKoni.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            TempData["message"] = "Ustájení bylo úspěšně odstraněno";
+
             return RedirectToAction(nameof(Index));
         }
 

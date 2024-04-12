@@ -26,7 +26,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Horse> horses = _context.Horse.Include(s => s.Owners).ToList();
+            List<Horse> horses = _context.Horse.OrderByDescending(o=>o.Id).Include(s => s.Owners).ToList();
 
             const int pageSize = 5;
             if (pg < 1)
@@ -88,6 +88,9 @@ namespace EvidenceKoni.Controllers
 
                 _context.Add(horse);
                 await _context.SaveChangesAsync();
+
+                TempData["message"] = "Nový kůň byl úspěšně vytvořen";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -130,6 +133,8 @@ namespace EvidenceKoni.Controllers
                 {
                     _context.Update(horse);
                     await _context.SaveChangesAsync();
+
+                    TempData["message"] = "Data o koni byla úspěšně upravena";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -185,6 +190,9 @@ namespace EvidenceKoni.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            TempData["message"] = "Kůň byl úspěšně odstraněn";
+
             return RedirectToAction(nameof(Index));
         }
 

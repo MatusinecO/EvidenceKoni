@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using EvidenceKoni.Data;
+﻿using EvidenceKoni.Data;
 using EvidenceKoni.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EvidenceKoni.Controllers
 {
-    [Authorize(Roles =UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class OwnersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -34,7 +29,7 @@ namespace EvidenceKoni.Controllers
 
             int recsCount = owners.Count;
             var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg -1) * pageSize;
+            int recSkip = (pg - 1) * pageSize;
             var data = owners.Skip(recSkip).Take(pager.PageSize).ToList();
             this.ViewBag.Pager = pager;
 
@@ -53,9 +48,9 @@ namespace EvidenceKoni.Controllers
             }
 
             var owner = await _context.Owner
-                .Include(c=>c.Stables)
-                .Include(c=>c.Horses)
-				.FirstOrDefaultAsync(m => m.Id == id);
+                .Include(c => c.Stables)
+                .Include(c => c.Horses)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();
@@ -151,8 +146,8 @@ namespace EvidenceKoni.Controllers
             }
 
             var owner = await _context.Owner
-                .Include(p=>p.Horses)
-                .Include(p=>p.Stables)
+                .Include(p => p.Horses)
+                .Include(p => p.Stables)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
@@ -178,7 +173,7 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Owner.Remove(owner);
             }
-            
+
             await _context.SaveChangesAsync();
 
             TempData["message"] = "Majitel byl úspěšně odstraněn";
@@ -188,9 +183,9 @@ namespace EvidenceKoni.Controllers
 
         private bool OwnerExists(int id)
         {
-          return (_context.Owner?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Owner?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-       
+
     }
 }

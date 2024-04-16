@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using EvidenceKoni.Data;
+﻿using EvidenceKoni.Data;
 using EvidenceKoni.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EvidenceKoni.Controllers
 {
-    [Authorize(Roles =UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class WorkersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +21,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Worker> workers = _context.Worker.OrderByDescending(o=>o.Id).ToList();
+            List<Worker> workers = _context.Worker.OrderByDescending(o => o.Id).ToList();
 
             const int pageSize = 5;
             if (pg < 1)
@@ -42,16 +37,6 @@ namespace EvidenceKoni.Controllers
             return View(data);
         }
 
-        /*
-        // GET: Workers
-        public async Task<IActionResult> Index()
-        {
-              return _context.Worker != null ? 
-                          View(await _context.Worker.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Worker'  is null.");
-        }
-        */
-
         // GET: Workers/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
@@ -62,8 +47,8 @@ namespace EvidenceKoni.Controllers
             }
 
             var worker = await _context.Worker
-                .Include(s=>s.Procedures) //Přidáno
-                .ThenInclude(h=>h.Horse) // Přidáno
+                .Include(s => s.Procedures) //Přidáno
+                .ThenInclude(h => h.Horse) // Přidáno
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (worker == null)
             {
@@ -183,7 +168,7 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Worker.Remove(worker);
             }
-            
+
             await _context.SaveChangesAsync();
 
             TempData["message"] = "Pracovník byl úspěšně odstraněn";
@@ -193,7 +178,7 @@ namespace EvidenceKoni.Controllers
 
         private bool WorkerExists(int id)
         {
-          return (_context.Worker?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Worker?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

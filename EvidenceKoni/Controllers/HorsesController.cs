@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EvidenceKoni.Data;
+using EvidenceKoni.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EvidenceKoni.Data;
-using EvidenceKoni.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace EvidenceKoni.Controllers
 {
-    [Authorize(Roles =UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class HorsesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +22,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Horse> horses = _context.Horse.OrderByDescending(o=>o.Id).Include(s => s.Owners).ToList();
+            List<Horse> horses = _context.Horse.OrderByDescending(o => o.Id).Include(s => s.Owners).ToList();
 
             const int pageSize = 5;
             if (pg < 1)
@@ -63,8 +59,8 @@ namespace EvidenceKoni.Controllers
 
             return View(horse);
         }
-        
-       
+
+
         // GET: Horses/Create
         public IActionResult Create()
         {
@@ -97,7 +93,7 @@ namespace EvidenceKoni.Controllers
             return View(horse);
         }
 
-       
+
         // GET: Horses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -155,7 +151,7 @@ namespace EvidenceKoni.Controllers
 
 
 
-        
+
         // GET: Horses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -173,7 +169,7 @@ namespace EvidenceKoni.Controllers
 
             return View(horse);
         }
-        
+
         // POST: Horses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -188,7 +184,7 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Horse.Remove(horse);
             }
-            
+
             await _context.SaveChangesAsync();
 
             TempData["message"] = "Kůň byl úspěšně odstraněn";
@@ -198,10 +194,10 @@ namespace EvidenceKoni.Controllers
 
         private bool HorseExists(int id)
         {
-          return (_context.Horse?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Horse?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        
+
 
     }
 }

@@ -27,7 +27,7 @@ namespace EvidenceKoni.Controllers
             ViewData["CurrentFilter"] = SearchString;
             var procedures = from o in _context.Procedure.Include(p => p.Horse).Include(p => p.Worker)
                              select o;
-            procedures = procedures.OrderByDescending(p => p.DateOfProcedure); // Add this line
+            procedures = procedures.OrderByDescending(p => p.DateOfProcedure);
             if (!String.IsNullOrEmpty(SearchString?.Trim()))
             {
                 procedures = procedures.Where(p => p.Horse.Name.ToLower().Contains(SearchString.Trim().ToLower()));

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EvidenceKoni.Data;
+using EvidenceKoni.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EvidenceKoni.Data;
-using EvidenceKoni.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace EvidenceKoni.Controllers
 {
-    [Authorize(Roles =UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class StablesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +22,7 @@ namespace EvidenceKoni.Controllers
         [AllowAnonymous]
         public IActionResult Index(int pg = 1)
         {
-            List<Stable> stables = _context.Stable.OrderByDescending(o=>o.Id).Include(s => s.Owners).Include(s => s.Horse).ToList();/////
+            List<Stable> stables = _context.Stable.OrderByDescending(o => o.Id).Include(s => s.Owners).Include(s => s.Horse).ToList();/////
 
             const int pageSize = 5;
             if (pg < 1)
@@ -54,7 +50,7 @@ namespace EvidenceKoni.Controllers
 
             var stable = await _context.Stable
                 .Include(s => s.Owners)
-                .Include(c=>c.Horse)/////
+                .Include(c => c.Horse)/////
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (stable == null)
             {
@@ -100,7 +96,7 @@ namespace EvidenceKoni.Controllers
             return View(stable);
         }
 
-        
+
         // GET: Stables/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -190,7 +186,7 @@ namespace EvidenceKoni.Controllers
             {
                 _context.Stable.Remove(stable);
             }
-            
+
             await _context.SaveChangesAsync();
 
             TempData["message"] = "Ustájení bylo úspěšně odstraněno";
@@ -200,7 +196,7 @@ namespace EvidenceKoni.Controllers
 
         private bool StableExists(int id)
         {
-          return (_context.Stable?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Stable?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

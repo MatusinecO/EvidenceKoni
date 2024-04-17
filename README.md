@@ -24,7 +24,7 @@ Pro spuštění aplikace je třeba provést následující kroky:
 
 Tuto aplikaci jsem vyvinul jako studijní projekt pro získání potřebných znalostí a základů ASP .NET Core MVC a v důsledku toho i potřebou efektivně spravovat data ve stájích a zjednodušit práci majitelům a zaměstnancům.
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Stable Management Application
 

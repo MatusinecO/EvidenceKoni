@@ -11,9 +11,8 @@
 </head>
 <body>
     <header>
-        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand m-3" asp-area="" asp-controller="Home" asp-action="Index">
                     <span style="font-size: 2.2rem;">E-stable</span>
                 </a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -45,7 +44,7 @@
                                 <span class="navbar-text">
                                     <i class="fas fa-user"></i> @User.Identity.Name
                                 </span>
-                                <a class="btn btn-outline-danger ms-2" style="font-size: 1.1rem" asp-controller="Account" asp-action="Logout">Odhlásit</a>
+                                <a class="btn btn-outline-danger ms-2 m-3" style="font-size: 1.1rem" asp-controller="Account" asp-action="Logout">Odhlásit</a>
                             </div>
                         }
                         else
@@ -56,7 +55,6 @@
                     </div>
                 </div>
             </nav>
-        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

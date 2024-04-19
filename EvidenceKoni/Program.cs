@@ -61,37 +61,13 @@ namespace EvidenceKoni
             {
                 RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                IdentityUser? defaultAdminUser = await userManager.FindByEmailAsync("example@example.com");
 
-                // Seznam emailù, které mají být nastaveny jako správci
-                List<string> adminEmails = new List<string>
-                {
-                    "on.matusinec@gmail.com",
-                    "example@example.com"
-                };
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
 
-                foreach (string email in adminEmails)
-                {
-                    IdentityUser? user = await userManager.FindByEmailAsync(email);
-
-                    if (user == null)
-                    {
-                        // Pokud uživatel neexistuje, vytvoøím nového uživatele
-                        IdentityUser newUser = new IdentityUser { UserName = email, Email = email };
-                        await userManager.CreateAsync(newUser);
-
-                        // Pøidám nového uživatele do role admina
-                        await userManager.AddToRoleAsync(newUser, UserRoles.Admin);
-                    }
-                    else
-                    {
-                        // Pokud uživatel již existuje, zkontroluji, zda je v roli admina
-                        if (!await userManager.IsInRoleAsync(user, UserRoles.Admin))
-                        {
-                            // Pokud není, pøidám ho do této role
-                            await userManager.AddToRoleAsync(user, UserRoles.Admin);
-                        }
-                    }
-                }
+                if (defaultAdminUser is not null && !await userManager.IsInRoleAsync(defaultAdminUser, UserRoles.Admin))
+                    await userManager.AddToRoleAsync(defaultAdminUser, UserRoles.Admin);
             }
 
 
